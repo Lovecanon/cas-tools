@@ -11,7 +11,7 @@ use datatom\casTools\Utils;
 use \Exception;
 
 class CasURP extends AbstractCasTools {
-    protected $api = "applications/urp";
+    protected $api = "sync/urp";
 
     function __construct(Auth $auth,
                          string $logFile = null,
