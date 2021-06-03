@@ -10,8 +10,8 @@ use datatom\casTools\AbstractCasTools;
 use datatom\casTools\Utils;
 use \Exception;
 
-class CasURP extends AbstractCasTools {
-    protected $api = "sync/urp";
+class CasURPAck extends AbstractCasTools {
+    protected $api = "sync/urp/ack";
 
     function __construct(Auth $auth,
                          string $logFile = null,
@@ -21,13 +21,9 @@ class CasURP extends AbstractCasTools {
         parent::__construct($this->api, $auth, $logFile, $logLevel);
     }
 
-    function sync(array $roleArray, array $guids=null) {
-        if ($guids == null) {
-            $guids = [];
-        }
+    function sync(array $guids) {
         $data = [
             "stats" => $this->getSysInfo(),
-            "role" => $roleArray,
             "ack" => $guids
         ];
 
