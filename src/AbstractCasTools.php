@@ -71,4 +71,29 @@ abstract class AbstractCasTools {
     public function getApi() {
         return $this->api;
     }
+
+    function getSysInfo() {
+        $memoryUsage = null;
+        try {
+            $memoryUsage = Utils::memoryUsage();
+        } catch (Exception $exception) {
+            $this->logger->warning("get mermory usage fail");
+        }
+        return array(
+            "os_name" => php_uname("s"),
+            "os_version" => php_uname("v"),
+            "web_server" => "Nginx",
+            "web_server_version" => "1.16.1",
+            "application_server" => "fpm-fcgi",
+            "application_server_version" => PHP_VERSION,
+            "language" => "php",
+            "language_version" => PHP_VERSION,
+            "sys_load" => implode(",", sys_getloadavg()),
+            "cup_usage" => sys_getloadavg()[0],
+            "memory_usage" => $memoryUsage,
+            "sync_interval" => 300,
+            "version" => "V1",
+            "description" => "cas=tools"
+        );
+    }
 }
